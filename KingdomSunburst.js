@@ -1,4 +1,4 @@
-define(["http://d3js.org/d3.v5.min.js"], function(d3) {
+define(["https://ajax.googleapis.com/ajax/libs/d3js/5.7.0/d3.min.js"], function(d3) {
   "use strict";
 
   function KingdomSunburst() {}
