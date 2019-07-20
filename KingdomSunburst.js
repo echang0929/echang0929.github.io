@@ -30,7 +30,8 @@ define(["https://ajax.googleapis.com/ajax/libs/d3js/5.7.0/d3.min.js"], function(
       .append("g")
       .attr("transform", "translate(" + width / 2 + "," + (height / 2) + ")");
 
-    var grpFun = d3.nest().key(d => 'All');
+    var grpFun = d3.nest()
+      .key(d => 'All');
     for (var k = 0; k < this.m_colCount - 2; k++) {
       switch (k) {
         case 0:
@@ -72,10 +73,13 @@ define(["https://ajax.googleapis.com/ajax/libs/d3js/5.7.0/d3.min.js"], function(
       .sum(d => d.count);
 
     svg.selectAll("path")
-      .data(partition(root).descendants())
-      .enter().append("path")
+      .data(partition(root)
+        .descendants())
+      .enter()
+      .append("path")
       .attr("d", arc)
-      .style("fill", d => color((d.children ? d : d.parent).data.key))
+      .style("fill", d => color((d.children ? d : d.parent)
+        .data.key))
       .on("click", click)
       .append("title")
       .text(d => d.data.key + "\n" + formatNumber(d.value));
@@ -89,7 +93,8 @@ define(["https://ajax.googleapis.com/ajax/libs/d3js/5.7.0/d3.min.js"], function(
             yr = d3.interpolate(y.range(), [d.y0 ? 20 : 0, radius]);
           return function(t) {
             x.domain(xd(t));
-            y.domain(yd(t)).range(yr(t));
+            y.domain(yd(t))
+              .range(yr(t));
           };
         })
         .selectAll("path")
